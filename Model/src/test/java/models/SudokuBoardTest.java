@@ -258,4 +258,14 @@ public class SudokuBoardTest {
         assertFalse(sudokuBoard.equals(clonedBoard));
         assertNotEquals(sudokuBoard.hashCode(), clonedBoard.hashCode());
     }
+
+    @Test
+    void testInvalidBoard_DuplicateInRow() {
+        SudokuBoard sudokuBoard = new SudokuBoard(new BacktrackingSudokuSolver());
+        sudokuBoard.setField(0, 0, 5);
+        assertTrue(sudokuBoard.isValidSudoku());    // Should be valid
+        
+        sudokuBoard.setField(1, 0, 5);
+        assertFalse(sudokuBoard.isValidSudoku());   // Now should be invalid
+    }
 }
